@@ -178,3 +178,7 @@ spring.mail.password=your_email_password
 - CORS configuration
 - Input validation
 - SQL injection prevention
+=======
+# College-Management-System
+This is a frontend-based College Management System built using React.js. It provides user interfaces for students, teachers, and administrators.  Features: - Dashboard for different users - Form handling - Responsive design - API integration  Technologies Used: - React.js - Java
+>>>>>>> e92bf484e46dbacac9eaa4c0b37727c91b5fa543
