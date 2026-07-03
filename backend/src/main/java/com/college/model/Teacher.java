@@ -26,7 +26,7 @@ public class Teacher {
     @Column(name = "department")
     private String department;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
     

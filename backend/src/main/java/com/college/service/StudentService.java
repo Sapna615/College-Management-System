@@ -54,10 +54,22 @@ public class StudentService {
 
     public Student createStudent(Student student) {
         try {
-            System.out.println("Creating student with data: " + student.getRollNumber() + ", " + student.getUser().getName());
+            if (student == null) {
+                throw new RuntimeException("Student data is missing");
+            }
+            
+            if (student.getRollNumber() == null) {
+                throw new RuntimeException("Roll number is required");
+            }
+
+            if (student.getUser() == null) {
+                throw new RuntimeException("User data is missing");
+            }
+
+            System.out.println("Creating student with roll number: " + student.getRollNumber());
             
             if (studentRepository.existsByRollNumber(student.getRollNumber())) {
-                throw new RuntimeException("Roll number already exists");
+                throw new RuntimeException("Roll number '" + student.getRollNumber() + "' already exists");
             }
             
             // First, create and save the User
@@ -77,7 +89,7 @@ public class StudentService {
             }
             
             User savedUser = userRepository.save(user);
-            System.out.println("User saved with ID: " + savedUser.getId());
+            System.out.println("User saved successfully with email: " + savedUser.getEmail());
             
             // Then create the student with the saved User
             Student newStudent = new Student();

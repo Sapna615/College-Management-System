@@ -44,10 +44,22 @@ public class TeacherService {
 
     public Teacher createTeacher(Teacher teacher) {
         try {
-            System.out.println("Creating teacher with data: " + teacher.getEmployeeId() + ", " + teacher.getUser().getName());
+            if (teacher == null) {
+                throw new RuntimeException("Teacher data is missing");
+            }
+
+            if (teacher.getEmployeeId() == null) {
+                throw new RuntimeException("Employee ID is required");
+            }
+
+            if (teacher.getUser() == null) {
+                throw new RuntimeException("User data is missing");
+            }
+
+            System.out.println("Creating teacher with employee ID: " + teacher.getEmployeeId());
             
             if (teacherRepository.existsByEmployeeId(teacher.getEmployeeId())) {
-                throw new RuntimeException("Employee ID already exists");
+                throw new RuntimeException("Employee ID '" + teacher.getEmployeeId() + "' already exists");
             }
             
             // First, create and save the User
@@ -67,7 +79,7 @@ public class TeacherService {
             }
             
             User savedUser = userRepository.save(user);
-            System.out.println("User saved with ID: " + savedUser.getId());
+            System.out.println("User saved successfully with email: " + savedUser.getEmail());
             
             // Now create the teacher with the saved user
             Teacher newTeacher = new Teacher();
